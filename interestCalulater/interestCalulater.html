@@ -1,0 +1,29 @@
+<template>
+    <lightning-card title="Interest Calculater" icon-name="custom:custom66"> 
+        <lightning-layout class="slds-p-around_large">
+            <lightning-layout-item class="slds-p-around-small">
+                 <lightning-input label="EnterAmount" onchange={Amounthandler} value={EnterAmount1} name="EnterAmount"></lightning-input>
+                 <lightning-input  label="Enter no Years" onchange={Amounthandler} value={EnternoYears1} name="EnternoYears"></lightning-input>
+                 <lightning-input  label="Enter rate of interest" onchange={Amounthandler} value={Enterrateofinterest1} name="Enterrateofinterest"></lightning-input>
+            </lightning-layout-item>
+            <lightning-layout-item class="slds-p-around_small">
+                 <lightning-input label="Total Interest Accumlated"  disabled=""  value={InterestValue}></lightning-input>
+                 <lightning-input label="Total Amount At  Maturity " disabled="" value={MaturityValue}></lightning-input>
+   
+            </lightning-layout-item>
+    </lightning-layout>
+    <lightning-layout class="slds-p-around_large">
+            <lightning-layout-item class="slds-p-around_small">
+               <lightning-button label="Calulate" variant="Brand" onclick={calculatehandler}></lightning-button>
+          </lightning-layout-item>
+          <lightning-layout-item class="slds-p-around_small">
+               <lightning-button label="Clear" variant="Brand" onclick={clearhandler}></lightning-button>
+            
+            </lightning-layout-item>
+    </lightning-layout>
+    <template if:true={Profitcondition}>
+     <c-percentage-profit profit-values={Profit} > </c-percentage-profit>
+    </template>
+   
+ </lightning-card>
+</template>
