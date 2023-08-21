@@ -1,0 +1,87 @@
+public class WeatherApi {
+
+    
+
+    private static final String OPEN_WEATHER_API_URL = 'https://api.openweathermap.org/data/2.5/weather';
+
+    private static final String API_KEY = 'c116d05d18f3863c6dcd95fa2ec3756d';
+    @AuraEnabled
+    public static string currentWeather(string cityName){
+        
+        
+         String endpoint = OPEN_WEATHER_API_URL + '?q=' + EncodingUtil.urlEncode(cityName, 'UTF-8') + '&appid=' + API_KEY + '&units=metric';
+        
+        HttpRequest request = new HttpRequest();
+        request.setEndpoint(endpoint);
+        request.setMethod('GET');
+
+        HttpResponse response = new Http().send(request);
+        
+          if (response.getStatusCode() == 200) {
+            // Parse and process the response body (JSON) here
+            String responseBody = response.getBody();
+            System.debug('Response Body: ' + responseBody);
+              return responseBody;
+        } else {
+            System.debug('API Callout failed with status code: ' + response.getStatusCode());
+            System.debug('Response Body: ' + response.getBody());
+              return null;
+        }
+
+    }
+    
+   private static final String SPOONACULAR_API_URL = 'https://api.spoonacular.com';
+
+    private static final String S_API_KEY = '932145854ace48e5901005472aab64c4';
+    @AuraEnabled
+    public static string spoonacular(){
+        
+        //`https://api.spoonacular.com/recipes/random?number=1&tags=vegetarian,dessert&apiKey=${apiKey}`
+         String endpoint = SPOONACULAR_API_URL+'/recipes/random?number=1&tags=vegetarian,dessert&apiKey=' + S_API_KEY  ;
+        
+        HttpRequest request = new HttpRequest();
+        request.setEndpoint(endpoint);
+        request.setMethod('GET');
+
+        HttpResponse response = new Http().send(request);
+        
+          if (response.getStatusCode() == 200) {
+            // Parse and process the response body (JSON) here
+            String responseBody = response.getBody();
+            System.debug('Response Body: ' + responseBody);
+              return responseBody;
+        } else {
+            System.debug('API Callout failed with status code: ' + response.getStatusCode());
+            System.debug('Response Body: ' + response.getBody());
+              return null;
+        }
+
+    }
+     @AuraEnabled
+    public static string spoonacularSearch(string findByIngredients, string numberofrecipes){
+        
+        //https://api.spoonacular.com/recipes/findByIngredients?ingredients=apples,+flour,+sugar&number=2
+         String endpoint = SPOONACULAR_API_URL+'/recipes/findByIngredients?ingredients='+ findByIngredients+ '&number=' +numberofrecipes+ '&apiKey=' + S_API_KEY  ;
+        
+        HttpRequest request = new HttpRequest();
+        request.setEndpoint(endpoint);
+        request.setMethod('GET');
+
+        HttpResponse response = new Http().send(request);
+        
+          if (response.getStatusCode() == 200) {
+            // Parse and process the response body (JSON) here
+            String responseBody = response.getBody();
+            System.debug('Response Body: ' + responseBody);
+              return responseBody;
+        } else {
+            System.debug('API Callout failed with status code: ' + response.getStatusCode());
+            System.debug('Response Body: ' + response.getBody());
+              return null;
+        }
+
+    }
+    
+
+    
+}
